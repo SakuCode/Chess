@@ -1,0 +1,14 @@
+#mainpane{
+    -fx-background-image: url("images/chesspic.jpg");
+    -fx-background-repeat: round;
+    -fx-background-size: 800 600;
+    -fx-background-position: center center;
+}
+
+
+#gamepane{
+    -fx-background-image: url("images/fern.jpg");
+    -fx-background-repeat: round;
+    -fx-background-size: 800 800;
+    -fx-background-position: center center;
+}

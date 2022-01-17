@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.chess.MenuController">
+   <children>
+      <ImageView fitHeight="450.0" fitWidth="800.0" pickOnBounds="true">
+         <image>
+            <Image url="@images/chesspic.jpg" />
+         </image>
+      </ImageView>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" blendMode="OVERLAY" height="450.0" layoutX="250.0" opacity="0.47" stroke="BLACK" strokeLineCap="BUTT" strokeWidth="0.0" width="300.0">
+         <fill>
+            <LinearGradient endX="1.0" endY="0.9289099526066351" startX="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color opacity="0.0" />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.007662835249042145">
+                     <color>
+                        <Color red="0.9724537134170532" green="1.0" blue="0.7638888955116272" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+         <effect>
+            <DropShadow height="29.79" radius="14.3975" spread="0.5" width="29.8" />
+         </effect>
+      </Rectangle>
+      <Label alignment="CENTER" layoutX="307.0" layoutY="14.0" opacity="0.8" text="CHESS" textAlignment="CENTER">
+         <font>
+            <Font name="Bell MT" size="60.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="0.5450236966824644" endY="1.0" startX="0.5308056872037915">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.6184210777282715" green="0.6184210777282715" blue="0.6184210777282715" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
+      <VBox alignment="CENTER" blendMode="MULTIPLY" layoutX="275.0" layoutY="75.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="250.0" spacing="20.0" AnchorPane.bottomAnchor="75.0" AnchorPane.leftAnchor="275.0" AnchorPane.rightAnchor="275.0" AnchorPane.topAnchor="75.0">
+          <padding>
+              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+          </padding>
+         <children>
+            <Label opacity="0.8" text="Player One (White)">
+               <font>
+                  <Font name="Bookman Old Style" size="16.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="40.0" />
+               </VBox.margin>
+            </Label>
+            <TextField fx:id="playerOne" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" onKeyPressed="#handlePressed" onKeyTyped="#handlePressed">
+               <effect>
+                  <DropShadow height="60.0" radius="39.5" width="100.0">
+                     <color>
+                        <Color red="0.29019609093666077" green="0.29019609093666077" blue="0.29019609093666077" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </TextField>
+            <Label opacity="0.79" text="Player Two (Black)">
+               <font>
+                  <Font name="Bookman Old Style" size="16.0" />
+               </font>
+            </Label>
+            <TextField fx:id="playerTwo" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" onKeyPressed="#handlePressed" onKeyTyped="#handlePressed">
+               <effect>
+                  <DropShadow height="80.0" radius="44.5" width="100.0">
+                     <color>
+                        <Color red="0.28999999165534973" green="0.28999999165534973" blue="0.28999999165534973" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </TextField>
+             <Button fx:id="startBtn" alignment="CENTER" disable="true" onAction="#gameStartBtnClick" text="Start Game" textFill="#282828">
+               <font>
+                  <Font name="Bookman Old Style" size="16.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets top="40.0" />
+               </VBox.margin>
+               <effect>
+                  <DropShadow>
+                     <color>
+                        <Color red="1.0" green="0.8543333411216736" blue="0.5400000214576721" opacity="0.4978354871273041" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </Button>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
