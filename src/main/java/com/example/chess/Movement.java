@@ -12,6 +12,8 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 
+import java.util.Iterator;
+
 public class Movement {
 
     Player player,enemy;
@@ -143,9 +145,23 @@ public class Movement {
                     int x = col == null ? 0 : col;
                     int y = row == null ? 0 : row;
 
+
                     if (isValidPlace(piece,player,x,y)) {
                         try {
 
+                            success = true;
+                            moveMade = true;
+
+                            Iterator<Piece> enemyPiecesIt = enemy.getPieces().iterator();
+
+                            while (enemyPiecesIt.hasNext()) {
+                                Piece enemyPieceA = enemyPiecesIt.next();
+                                if (enemyPieceA.col == x && enemyPieceA.row == y) {
+                                    target.getChildren().remove(enemyPieceA.image);
+                                    enemyPiecesIt.remove();
+                                    scoreAdd(player, enemy, enemyPieceA, piece);
+                                }
+                            }
 
                             ImageView image = new ImageView(db.getImage());
                             StackPane empty = new StackPane();
@@ -161,8 +177,6 @@ public class Movement {
                             player.getPieces().remove(piece);
                             gl.addChessPiece(player, p);
 
-                            success = true;
-                            moveMade = true;
 
                             if (playerHasMoved(player)) {
                                 System.out.println("Player " + player.getPlayerId() + " made move");
@@ -206,6 +220,65 @@ public class Movement {
         sourceOnDragDone(source,gl.gbc.getgPane(),piece);
     }
 
+    public void scoreAdd(Player player, Player enemy, Piece enemyPiece, Piece playerPiece){
+
+        switch(enemyPiece.getName()){
+            case "pawn":
+                if(enemy.getPlayerId() == 2){
+                    gl.gameScore.playerOneScore += 1;
+                    gl.gameScore.playerTwoScore -= 1;
+                } else{
+                    gl.gameScore.playerTwoScore += 1;
+                    gl.gameScore.playerOneScore -= 1;
+                }
+                break;
+            case "knight":
+            case "bishop":
+                if(enemy.getPlayerId() == 2){
+                    gl.gameScore.playerOneScore += 3;
+                    gl.gameScore.playerTwoScore -= 3;
+                } else{
+                    gl.gameScore.playerTwoScore += 3;
+                    gl.gameScore.playerOneScore -= 3;
+                }
+                break;
+            case "rook":
+                if(enemy.getPlayerId() == 2){
+                    gl.gameScore.playerOneScore += 5;
+                    gl.gameScore.playerTwoScore -= 5;
+                } else{
+                    gl.gameScore.playerTwoScore += 5;
+                    gl.gameScore.playerOneScore -= 5;
+                }
+                break;
+            case "queen":
+                if(enemy.getPlayerId() == 2){
+                    gl.gameScore.playerOneScore += 9;
+                    gl.gameScore.playerTwoScore -= 9;
+                } else{
+                    gl.gameScore.playerTwoScore += 9;
+                    gl.gameScore.playerOneScore -= 9;
+                }
+                break;
+            case "king":
+                if(enemy.getPlayerId() == 2){
+                    gl.gameScore.playerOneWholeScore += 1;
+                    gl.resetBoard(player,this,playerPiece);
+                }else{
+
+                    gl.gameScore.playerTwoWholeScore += 1;
+                    gl.resetBoard(player,this,playerPiece);
+                }
+                break;
+            default:
+                System.out.println("Piece is not named right!");
+        }
+        gl.gbc.playerOneScore.setText(String.valueOf(gl.gameScore.playerOneScore));
+        gl.gbc.playerTwoScore.setText(String.valueOf(gl.gameScore.playerTwoScore));
+        gl.gbc.playerOneWholeScore.setText(String.valueOf(gl.gameScore.playerOneWholeScore));
+        gl.gbc.playerTwoWholeScore.setText(String.valueOf(gl.gameScore.playerTwoWholeScore));
+    }
+
     public boolean playerHasMoved(Player player) {
 
         if (moveMade == true) {
@@ -221,10 +294,23 @@ public class Movement {
      * @param player The player currently moving
      * @param enemy The other player(Opponent)
      */
-    private void turnBoard(GridPane gridPane, Player player,Player enemy) {
+    public void turnBoard(GridPane gridPane, Player player,Player enemy) {
+
+        double paneTempY = gl.gbc.getPlayerOnePane().getLayoutY();
+        gl.gbc.getPlayerOnePane().setLayoutY(gl.gbc.getPlayerTwoPane().getLayoutY());
+        gl.gbc.getPlayerTwoPane().setLayoutY(paneTempY);
+
+        double wholeScoreTempY = gl.gbc.playerOneWholeScore.getLayoutY();
+        gl.gbc.playerOneWholeScore.setLayoutY(gl.gbc.playerTwoWholeScore.getLayoutY());
+        gl.gbc.playerTwoWholeScore.setLayoutY(wholeScoreTempY);
+
+        double scoreTempY = gl.gbc.playerOneScore.getLayoutY();
+        gl.gbc.playerOneScore.setLayoutY(gl.gbc.playerTwoScore.getLayoutY());
+        gl.gbc.playerTwoScore.setLayoutY(scoreTempY);
 
         if (player.getPlayerId() == 1) {
             gridPane.setRotate(180);
+
             for(Piece e : player.getPieces()){
                 e.image.setRotate(180);
             }
@@ -313,4 +399,5 @@ public class Movement {
         }
         return false;
     }
+
 }

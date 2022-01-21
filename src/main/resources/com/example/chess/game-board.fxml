@@ -24,7 +24,7 @@
 
 <AnchorPane id="gamepane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" rotate="180.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.chess.GameBoardController">
    <children>
-      <Pane layoutX="50.0" prefHeight="100.0" prefWidth="250.0">
+      <Pane fx:id="playerTwoPane" layoutX="50.0" prefHeight="100.0" prefWidth="250.0">
          <children>
             <Label fx:id="PlayerTwoLabel" layoutX="100.0" layoutY="36.0" text="Player Two" textFill="#b5b5b5">
                <font>
@@ -219,7 +219,7 @@
                </GridPane.margin></StackPane>
          </children>
       </GridPane>
-      <Pane layoutX="50.0" layoutY="700.0" prefHeight="100.0" prefWidth="250.0">
+      <Pane fx:id="playerOnePane" layoutX="50.0" layoutY="700.0" prefHeight="100.0" prefWidth="250.0">
          <children>
             <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="15.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -288,7 +288,7 @@
             <Font name="Candara" size="30.0" />
          </font>
       </Label>
-      <Label layoutX="694.0" layoutY="490.0" text="0">
+      <Label fx:id="playerOneWholeScore" layoutX="694.0" layoutY="490.0" text="0">
          <font>
             <Font size="80.0" />
          </font>
@@ -312,7 +312,7 @@
             <DropShadow radius="12.25" width="30.0" />
          </effect>
       </Label>
-      <Label layoutX="694.0" layoutY="180.0" text="0">
+      <Label fx:id="playerTwoWholeScore" layoutX="694.0" layoutY="180.0" text="0">
          <font>
             <Font size="80.0" />
          </font>
@@ -336,7 +336,7 @@
             <DropShadow radius="12.25" width="30.0" />
          </effect>
       </Label>
-      <Label alignment="CENTER" layoutX="697.0" layoutY="401.0" prefHeight="47.0" prefWidth="36.0" text="0" textFill="#ffffff80">
+      <Label fx:id="playerOneScore" alignment="CENTER" layoutX="697.0" layoutY="401.0" prefHeight="47.0" prefWidth="36.0" text="0" textFill="#ffffff80">
          <font>
             <Font size="35.0" />
          </font>
@@ -344,7 +344,7 @@
             <DropShadow radius="12.25" width="30.0" />
          </effect>
       </Label>
-      <Label alignment="CENTER" layoutX="697.0" layoutY="348.0" prefHeight="47.0" prefWidth="36.0" text="0" textFill="#ffffff80">
+      <Label fx:id="playerTwoScore" alignment="CENTER" layoutX="697.0" layoutY="348.0" prefHeight="47.0" prefWidth="36.0" text="0" textFill="#ffffff80">
          <font>
             <Font size="35.0" />
          </font>

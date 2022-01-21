@@ -70,6 +70,7 @@ public class Piece{
         this.moves = moves;
     }
 
+
     /**
      * Method that excepts only the legal moves for a pawn
      * @param player The player who owns this piece
@@ -84,6 +85,7 @@ public class Piece{
 
         //White Player
         if(player.getPlayerId() == 1){
+            //Check if there is an enemy piece in front of the piece
             if(row == piece.row-1 && col == piece.col) {
                 for(Piece enemyA : enemy.getPieces()) {
                     if (row == enemyA.row && col == enemyA.col) {
@@ -93,6 +95,18 @@ public class Piece{
                 setMoves(moves + 1);
                 return true;
             }
+
+            //Check if the pawn can eat the enemy pawn
+            else if(row == piece.row-1 && col == piece.col-1 || col == piece.col+1){
+                for(Piece enemyA : enemy.getPieces()) {
+                    if (row == enemyA.row && col == enemyA.col) {
+                        setMoves(moves + 1);
+                        return true;
+                    }
+                }
+            }
+
+            //First moves can move two places forward
             else if(moves == 0){
                 if (row == piece.row-2 && col == piece.col) {
                     setMoves(moves + 1);
@@ -102,6 +116,7 @@ public class Piece{
 
         //Black Player
         }else {
+            //Check if there is an enemy piece in front of the piece
             if (row == piece.row+1 && col == piece.col) {
                 for(Piece enemyA : enemy.getPieces()) {
                     if (row == enemyA.row && col == enemyA.col) {
@@ -111,6 +126,18 @@ public class Piece{
                 setMoves(moves + 1);
                 return true;
             }
+
+            //Check if the pawn can eat the enemy pawn
+            else if(row == piece.row+1 && col == piece.col-1 || col == piece.col+1){
+                for(Piece enemyA : enemy.getPieces()) {
+                    if (row == enemyA.row && col == enemyA.col) {
+                        setMoves(moves + 1);
+                        return true;
+                    }
+                }
+            }
+
+            //First moves can move two places forward
             else if(moves == 0){
                 if (row == piece.row+2 && col == piece.col) {
                     setMoves(moves + 1);

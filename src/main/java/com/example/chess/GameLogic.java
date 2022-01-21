@@ -1,8 +1,10 @@
 package com.example.chess;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -11,6 +13,7 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.Objects;
 
 public class GameLogic extends ImageView {
@@ -18,7 +21,9 @@ public class GameLogic extends ImageView {
     Player white, black;
     GameBoardController gbc;
     CustomizePiece custom = new CustomizePiece();
+    Score gameScore;
 
+    int firstMove;
     Movement movement;
 
     Scene scene;
@@ -36,10 +41,15 @@ public class GameLogic extends ImageView {
         gbc.setPlayerOneLabel(white.getPlayerName());
         gbc.setPlayerTwoLabel(black.getPlayerName());
 
+        gameScore = new Score(0,0,0,0);
+        gbc.playerOneScore.setText(String.valueOf(gameScore.playerOneScore));
+        gbc.playerOneScore.setText(String.valueOf(gameScore.playerTwoScore));
+
         renderWhitePieces();
         renderBlackPieces();
 
         playerTurn(white, movement = new Movement(white, gbc.getgPane(), this));
+        firstMove = 1;
 
     }
 
@@ -225,5 +235,47 @@ public class GameLogic extends ImageView {
 
             }
             return;
+    }
+
+    void resetBoard(Player player,Movement m,Piece piece){
+        gameScore.playerOneScore = 0;
+        gameScore.playerTwoScore = 0;
+        gbc.playerOneScore.setText(String.valueOf(gameScore.playerOneScore));
+        gbc.playerOneScore.setText(String.valueOf(gameScore.playerTwoScore));
+
+        for( Piece e : white.getPieces()){
+            gbc.getgPane().getChildren().remove(e.image);
+        }
+
+        for( Piece e : black.getPieces()){
+            gbc.getgPane().getChildren().remove(e.image);
+        }
+
+
+        Iterator<Piece> whitePiecesIt = white.getPieces().iterator();
+        Iterator<Piece> blackPiecesIt = white.getPieces().iterator();
+
+        while (whitePiecesIt.hasNext()) {
+            whitePiecesIt.next();
+            whitePiecesIt.remove();
+        }
+
+        while (blackPiecesIt.hasNext()) {
+            blackPiecesIt.next();
+            blackPiecesIt.remove();
+        }
+
+        renderWhitePieces();
+        renderBlackPieces();
+
+        firstMove += 1;
+
+        if(firstMove % 2 == 0){
+            m.turnBoard(gbc.getgPane(),white,black);
+            playerTurn(black, movement = new Movement(black, gbc.getgPane(), this));
+        }else{
+            m.turnBoard(gbc.getgPane(),black,white);
+            playerTurn(white, movement = new Movement(white, gbc.getgPane(), this));
+        }
     }
 }
