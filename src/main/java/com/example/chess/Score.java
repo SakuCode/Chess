@@ -17,7 +17,4 @@ public class Score {
         this.playerOneWholeScore = playerOneWholeScore;
         this.playerTwoWholeScore = playerTwoWholeScore;
     }
-
-
-
 }

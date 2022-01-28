@@ -36,13 +36,13 @@ public class MenuController {
 
         GameLogic game = new GameLogic();
 
-        game.white = new Player(1,playerOne.getText());
-        game.black = new Player(2,playerTwo.getText());
+        game.playerOne = new Player(1,playerOne.getText());
+        game.playerTwo = new Player(2,playerTwo.getText());
 
         try {
             game.startGame(new Stage());
-            System.out.println("Player 1: " + game.white.getPlayerName());
-            System.out.println("Player 2: " + game.black.getPlayerName());
+            System.out.println("Player 1: " + game.playerOne.getPlayerName());
+            System.out.println("Player 2: " + game.playerTwo.getPlayerName());
 
 
         } catch (IOException e) {

@@ -12,6 +12,15 @@ public class GameBoardController extends MenuController{
 
     @FXML
     ImageView GameBoard;
+
+    public Label getPlayerOneLabel() {
+        return PlayerOneLabel;
+    }
+
+    public Label getPlayerTwoLabel() {
+        return PlayerTwoLabel;
+    }
+
     @FXML
     Label PlayerOneLabel;
     @FXML
